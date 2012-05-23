@@ -107,3 +107,11 @@ NumberLibrary.prototype.formatNumber = function(arg, numberOfDigits) {
 	
 	return num[0] + '.' + decimalPart;
 };
+
+// Function to check whether a number fuzzy matches another!
+NumberLibrary.prototype.fuzzyMatch = function(arg, matchNumber, percent) {
+	var difference = arg - matchNumber;
+	if (Math.abs(difference)/matchNumber <= (percent/100))
+		return true;
+	else
+		return false;
