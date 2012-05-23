@@ -68,3 +68,42 @@ StringLibrary.prototype.replaceInString = function( arg, character, replacementC
 	}
 	return string;
 }
+
+/*************** NUMBER LIBRARY *************/
+
+NumberLibrary = function() {
+}
+
+// Log function
+NumberLibrary.prototype.log = function(arg) {
+	console.log(arg);
+};
+
+// Function to format a number to use a certain precision
+NumberLibrary.prototype.formatNumber = function(arg, numberOfDigits) {
+	var str = arg.toString();
+	var num = str.split('.');
+	var decimalPart = "";
+	if (num[1] == null)
+		num[1] = "";
+	if (num[1].length < numberOfDigits) {
+		var limit = numberOfDigits - num[1].length;
+		for (i=0; i<limit; i++)
+			num[1] += '0';
+		decimalPart = num[1];
+	}
+	else if (num[1].length > numberOfDigits) {
+		var limit = num[1].length - numberOfDigits;
+		var decimal = parseInt(num[1]);
+		for (i=0; i<limit; i++)	{
+			var temp = decimal%10;
+			decimal /= 10;
+			decimal = Math.round(decimal);
+			if ( temp >= 5)
+				decimal++;
+		}
+		decimalPart = decimal.toString();
+	}
+	
+	return num[0] + '.' + decimalPart;
+};
